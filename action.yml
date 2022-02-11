@@ -1,0 +1,24 @@
+# action.yml
+name: 'Verify Azure Container Apps Namespace'
+description: 'This action verifies if your subscription is stilly relying on early preview ARM namespace for Azure Container Apps (Microsoft.Web). Once at least one of your Container Apps has been migrated to the new namespace (Microsoft.App), the action will fail.'
+inputs:
+  azure-client-id:
+    description: ''
+    required: true
+  azure-client-secret:
+    description: ''
+    required: true
+  azure-tenant-id:
+    description: ''
+    required: true
+  azure-subscription-id:
+    description: ''
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  env:
+    AZURE_CLIENT_ID: ${{ inputs.azure-client-id }}
+    AZURE_CLIENT_SECRET: ${{ inputs.azure-client-secret }}
+    AZURE_TENANT_ID: ${{ inputs.azure-tenant-id }}
+    AZURE_SUBSCRIPTION_ID: ${{ inputs.azure-subscription-id }}
